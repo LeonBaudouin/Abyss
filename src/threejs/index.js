@@ -8,8 +8,8 @@ import VolumetricSpotLightMaterial from "./Threex/threex.volumetricspotlightmate
 import SubmarineController from "./Controllers/SubmarineController";
 import CameraController from "./Controllers/CameraController";
 import ParticleController from "./Controllers/ParticleController";
-import { transformRange } from "../front/CustomTypes/Interval";
 import SubmarineLightController from "./Controllers/SubmarineLightController";
+import { transformRange } from "../front/Influencets/CustomTypes/Interval";
 
 const modelPath = [
     'assets/model/sousmarin.glb',
@@ -41,7 +41,7 @@ function createObjects(data) {
 
     const camera = new BaseObject3d(
         () => {
-            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.01, 1000);
             camera.position.set(0, 0, 5);
             return camera;
         },

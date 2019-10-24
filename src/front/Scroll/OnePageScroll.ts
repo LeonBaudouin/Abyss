@@ -1,8 +1,8 @@
 import { SwipeHandler } from "./SwipeHandler";
 import {GetWindowHeight } from "../Utils/UtilsFunctions";
 import { addWheelListener } from "../Utils/AddWheelListener.js";
-import { Point } from "../CustomTypes/Point";
 import Easing from "../../threejs/Math/Easing";
+import { Point } from "../Influencets/CustomTypes/Point";
 
 type ScrollCallback = (i: number) => void; 
 

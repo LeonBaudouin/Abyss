@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import AbstractController from "../Abstract/AbstractController.class";
-import { EventProvider } from "../../front/Events/EventProvider";
 import Easing from "../Math/Easing";
+import { EventProvider } from "../../front/Influencets/Events/EventProvider";
 
 export default class CameraController extends AbstractController {
     constructor() {

@@ -1,5 +1,5 @@
 import AbstractController from "../Abstract/AbstractController.class";
-import { EventProvider } from "../../front/Events/EventProvider";
+import { EventProvider } from "../../front/Influencets/Events/EventProvider";
 
 export default class SubmarineLightController extends AbstractController {
     constructor() {

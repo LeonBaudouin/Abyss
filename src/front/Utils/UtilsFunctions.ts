@@ -1,4 +1,4 @@
-import { Point } from "../CustomTypes/Point";
+import { Point } from "../Influencets/CustomTypes/Point";
 
 export namespace MathFunc {
 
