@@ -1,0 +1,11 @@
+.main-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &-title {
+        font-size: 14rem;
+        font-weight: 300;
+        font-family: 'poiret one', sans-serif;
+    }
+}

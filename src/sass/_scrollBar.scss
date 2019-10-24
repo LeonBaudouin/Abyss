@@ -1,0 +1,82 @@
+.scrollBar {
+    position: fixed;
+    height: 100vh;
+    right: 20px;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    &Button {
+        cursor: pointer;
+        font-size: 1.2rem;
+        background-color: #001824;
+        transition: background-color ease-out 500ms, transform ease-in-out 400ms;
+        margin: 0 0;
+        transform: translateX(0);
+        
+        &:hover {
+            transform: translateX(-10px);
+        }
+
+        &::after {
+            content: '•';
+            padding-left: 15px;
+            opacity: 0;
+            transition: all ease-in-out 400ms;
+        }
+
+        &.active {
+            transform: translateX(-34%);
+        }
+        
+        &.active::after {
+            opacity: 1;
+            padding-left: 5px;
+        }
+    }
+
+    &Point {
+        height: 0.2rem;
+        width: 0.2rem;
+        background-color: white;
+        border-radius: 100%;
+        
+        &Container {
+            z-index: -1;
+            position: absolute;
+            height: 100%;
+            flex-direction: column;
+            display: flex;
+            justify-content: space-around;
+            align-self: center;
+        }
+    }
+    
+
+    &:hover {
+        @for $i from 1 to 35 {
+            .scrollBarPoint:nth-of-type(#{$i}) {
+                animation: wobble 500ms $i * 20ms;
+            }
+        }
+    }
+
+    @keyframes wobble {
+        0% {
+            transform: translateX(0px);
+        }
+        25% {
+            transform: translateX(-2px);
+        }
+        40% {
+            transform: translateX(-1px);
+        }
+        80% {
+            transform: translateX(0.5px);
+        }
+        100% {
+            transform: translateX(0.5px);
+        }
+    }
+}

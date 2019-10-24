@@ -1,0 +1,73 @@
+.underwater-page {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+
+    .description {
+        width: 40vw;
+        max-width: 450px;
+
+        .specie {
+            &-name, &-nickname {
+                text-align: center;
+            }
+
+            &-name {
+                font-weight: 300;
+                font-family: 'poiret one', sans-serif;
+                font-size: 2rem;
+                margin-bottom: 1rem;
+            }
+            
+            &-nickname {
+                font-size: 1.6rem;
+                margin-bottom: 1.7rem;
+            }
+
+            &-year, &-family {
+                font-size: 1.2rem;
+
+                strong {
+                    font-weight: 500;
+                }
+            }
+
+            &-year {
+                margin-bottom: 0.7rem;
+            }
+
+            &-family {
+                margin-bottom: 1.2rem;
+            }
+        }
+    }
+
+    &.right {
+        .description {
+            grid-column: 2/2;
+        }
+    }
+}
+
+.page.active {
+    .description {
+        @for $i from 1 to 6 {
+            & :nth-child(#{$i}) {
+                animation: fadeFromAbove 500ms 1500ms + $i * 50ms ease-out both;
+            }
+        }
+    
+        @keyframes fadeFromAbove {
+            0% {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+    }
+}

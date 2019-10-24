@@ -1,0 +1,19 @@
+@import '_onePage.scss';
+@import '_mainPage.scss';
+@import '_graphicPage.scss';
+@import '_canvas.scss';
+@import '_underwaterPage.scss';
+@import '_scrollBar.scss';
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+    font-family: gill-sans-nova, sans-serif;
+    font-weight: 300;
+}
+
+// button {
+//     position: fixed;
+//     top: 0;
+//     z-index: 1;
+// }
