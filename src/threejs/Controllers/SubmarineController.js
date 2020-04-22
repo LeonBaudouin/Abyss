@@ -57,13 +57,13 @@ export default class SubmarineController extends AbstractController {
                 new THREE.Vector3(-7, -55, -6),
                 new THREE.Vector3(20, -45, 10),
                 new THREE.Vector3(30, -65, -30),
-                new THREE.Vector3(4, -70, -5)
+                new THREE.Vector3(4, -70, -3.5)
             )
         )
 
         this.curves[6].add(
             new THREE.CubicBezierCurve3(
-                new THREE.Vector3(4, -70, -5),
+                new THREE.Vector3(4, -70, -3.5),
                 new THREE.Vector3(-20, -76, 25),
                 new THREE.Vector3(-15, -78, -30),
                 new THREE.Vector3(-2, -80, -5)

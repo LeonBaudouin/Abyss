@@ -1,7 +1,6 @@
 import * as THREE from "three";
 import BaseObject3d from './Abstract/BaseObject3d.class';
 import ThreeScene from './ThreeScene';
-import GLTFLoader from './Loader/GLTFloader';
 import { Refractor } from './jsm/Refractor';
 import { WaterRefractionShader } from './jsm/WaterRefractionShader';
 import VolumetricSpotLightMaterial from "./Threex/threex.volumetricspotlightmaterial";
@@ -10,23 +9,10 @@ import CameraController from "./Controllers/CameraController";
 import ParticleController from "./Controllers/ParticleController";
 import SubmarineLightController from "./Controllers/SubmarineLightController";
 import { transformRange } from "../front/Influencets/CustomTypes/Interval";
+import FloatingCreatureController from "./Controllers/FloatingCreatureController";
 
-const modelPath = [
-    'assets/model/sousmarin.glb',
-    'assets/model/macropinnamicrostoma.glb',
-    'assets/model/calamar.glb',
-    'assets/model/tutu.glb',
-    'assets/model/mangeurdenemo.glb',
-    'assets/model/epongelampadaire.glb',
-    'assets/model/beroeforskalii.glb',
-    'assets/model/dumbo.glb'
-]
 
-export function startThree() {
-    GLTFLoader.load(modelPath).then(createObjects);
-}
-
-function createObjects(data) {
+export function createObjects(data) {
     let titleTarget;
     let spotTargetRight;
     let spotTargetLeft;
@@ -71,7 +57,7 @@ function createObjects(data) {
                         color: 0xcccccc,
                         size: 0.03,
                         opacity: 0.5,
-                        map: THREE.ImageUtils.loadTexture("assets/particle.png"),
+                        map: THREE.ImageUtils.loadTexture("./assets/particle.png"),
                         transparent: true,
                     });
         
@@ -96,7 +82,10 @@ function createObjects(data) {
                 macropinnamicrostoma.rotateY(Math.PI - Math.PI / 4);
 
                 return macropinnamicrostoma;
-            }
+            },
+            [
+                new FloatingCreatureController()
+            ]
         ),
         new BaseObject3d(
             () => {
@@ -104,7 +93,10 @@ function createObjects(data) {
                 calamar.rotateY(Math.PI + Math.PI / 3);
                 calamar.position.set(-6, -24, -2);
                 return calamar;
-            }
+            },
+            [
+                new FloatingCreatureController()
+            ]
         ),
         new BaseObject3d(
             () => {
@@ -116,7 +108,20 @@ function createObjects(data) {
                 tutu.rotateY(Math.PI + Math.PI / 3);
                 tutu.position.set(0, -41, 2);
                 return tutu;
-            }
+            },
+            [
+                new FloatingCreatureController()
+            ],
+            [
+                new BaseObject3d(
+                    () => {
+                        var light = new THREE.PointLight( 0x9c2828, 10, 2 );
+                        light.decay = 2;
+                        light.position.set(0, 0.5, 0);
+                        return light;
+                    }
+                )
+            ]
         ),
         new BaseObject3d(
             () => {
@@ -129,7 +134,10 @@ function createObjects(data) {
                 nemo.rotateX(- Math.PI / 8);
                 nemo.position.set(4, -54, -2);
                 return nemo;
-            }
+            },
+            [
+                new FloatingCreatureController()
+            ]
         ),
         new BaseObject3d(
             () => {
@@ -138,21 +146,41 @@ function createObjects(data) {
                 const material = sponge.children[0].children[1].material;
                 material.emissive = new THREE.Color(0x649ac6);
                 material.emissiveIntensity = 0.5;
-                material.opacity = 0.4;
+                material.opacity = 0.7;
                 material.transparent = true;
                 sponge.rotateY(Math.PI);
-                const factor = 5.4 / 900;
-                const diff = window.innerWidth - 636;
-                const x = - 2 -factor * diff;
-                sponge.position.set(x, -70, -1);
+                const ratio = window.innerWidth / window.innerHeight;
+                const x = ratio * 5.5 - 3.4143;
+                sponge.position.set(-x, -70, -1);
                 return sponge;
             },
             [],
             [
                 new BaseObject3d(
                     () => {
-                        var light = new THREE.PointLight( 0x649ac6, 2, 3 );
+                        const light = new THREE.PointLight( 0x649ac6, 8, 3 );
                         light.position.set(-0.4, 0.45, 0);
+                        return light;
+                    }
+                ),
+                new BaseObject3d(
+                    () => {
+                        const light = new THREE.PointLight( 0x649ac6, 5, 3 );
+                        light.position.set(0, 1, 0);
+                        return light;
+                    }
+                ),
+                new BaseObject3d(
+                    () => {
+                        const light = new THREE.PointLight( 0x649ac6, 5, 3 );
+                        light.position.set(0.45, 0.45, 0);
+                        return light;
+                    }
+                ),
+                new BaseObject3d(
+                    () => {
+                        const light = new THREE.PointLight( 0x649ac6, 5, 3 );
+                        light.position.set(0, 0.45, 0.45);
                         return light;
                     }
                 )
@@ -168,7 +196,10 @@ function createObjects(data) {
                 skalii.rotateY(Math.PI - Math.PI / 3);
                 skalii.position.set(2.5, -81.5, 1);
                 return skalii;
-            }
+            },
+            [
+                new FloatingCreatureController()
+            ]
         ),
         new BaseObject3d(
             () => {
@@ -177,7 +208,10 @@ function createObjects(data) {
                 dumbo.rotateY(Math.PI / 2);
                 dumbo.rotateZ(-Math.PI / 12);
                 return dumbo;
-            }
+            },
+            [
+                new FloatingCreatureController()
+            ]
         ),
         new BaseObject3d(
             () => {

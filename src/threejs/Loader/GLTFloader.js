@@ -8,6 +8,7 @@ export default class GLTFLoader {
 
     static loadOne(path) {
         const loader = GLTFLoader.getNativeLoader();
+        loader.setCrossOrigin('anonymous');
         return new Promise((resolve, reject) => {
             loader.load(
                 path,

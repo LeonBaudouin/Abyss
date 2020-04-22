@@ -50,5 +50,9 @@ export class Canvas {
     public static getContext() : CanvasRenderingContext2D {
         return Canvas.instance.context;
     }
+
+    public static getHTMLElement() : HTMLElement {
+        return Canvas.instance.htmlElement;
+    }
     
 }

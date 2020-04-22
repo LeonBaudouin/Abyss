@@ -6,6 +6,7 @@ import { CanvasSetup } from "./CanvasSetup";
 import { Canvas } from "./Influencets/Canvas";
 
 export function startFront() {
+    document.querySelector('.loading-page').classList.add('hidden');
     processData();
     const scrollButtons = document.querySelectorAll('.scrollBarButton');
     const pages = document.querySelectorAll('.page');
@@ -21,7 +22,8 @@ export function startFront() {
     document.querySelector('.scrollButton').addEventListener('click', () => onePage.Next());
     scrollButtons.forEach(
         (element, index) => element.addEventListener('click', () => onePage.MoveTo(index + 2))
-    )
+    );
+    const audio = (new Audio('./assets/ambient.mp3')).play();
 }
 
 function processData() {
@@ -29,20 +31,19 @@ function processData() {
     const exitXInterval = {min: 1750, max: 2020};
     const entryYInterval = {min: 0, max: 11.75};
     const exitYInterval = {min: 0, max: 3000};
-    fetch('./assets/data.csv')
+    fetch('../assets/data.csv')
         .then(res => res.text())
         .then(text =>
             text.split(/\r\n|\n/)
                 .slice(1)
                 .map(cur => {
                     const coords = cur.split(',')
-                    const x = exitXInterval.min + transformRange(parseFloat(coords[0]), entryXInterval, exitXInterval)
+                    const x = transformRange(parseFloat(coords[0]), entryXInterval, exitXInterval)
                     const y = transformRange(entryYInterval.max - parseFloat(coords[1]), entryYInterval, exitYInterval)
                     return {x, y};
                 })
         )
         .then((data) => {
-            console.log(data)
             const canvas = CanvasSetup(data);
             gameLoop(canvas);
         })

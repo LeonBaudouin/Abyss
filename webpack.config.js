@@ -1,5 +1,6 @@
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 var path = require('path');
 
 module.exports = {
@@ -67,6 +68,9 @@ module.exports = {
             template: './src/index.html',
             inject: true
         }),
+        new CopyPlugin([
+          { from: 'src/assets', to: 'assets/' }
+        ]),
         new ExtractTextPlugin({filename:'app.bundle.css'}),
     ],
 };

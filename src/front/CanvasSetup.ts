@@ -16,6 +16,7 @@ import { PositionState } from "./Influencets/Abstract/BaseStates";
 import { StateObjectInterface } from "./Influencets/Abstract/StateObjectInterface";
 import LineState from "./Shapes/Line/LineState";
 import LineRenderer from "./Shapes/Line/LineRenderer";
+import AvoidMouse from "./Controller/AvoidMouse";
 
 
 const sin = (time: number, amount: number, offset: number) => Math.sin(time * 0.03 + offset * Math.PI * 2) * amount
@@ -33,7 +34,7 @@ export function CanvasSetup(data: Array<any>) {
     const amounts = (new Array(7)).fill(0).map((el, i) => generateAmount(i, width, height))
     const points = data.map((point) => generatePoint(point, width, height))
     const actualPoints = points.map(cur => <Point & {selected: boolean}>(<PositionState & StateObjectInterface>cur.getState()).position)
-    // const topLeft = {x: 0, y: 0};
+    const topLeft = {x: 0, y: 0};
     // let lines : BaseDrawable[] = []
     // actualPoints.forEach((point) => {
     //     const closestPoints = actualPoints.reduce((acc, cur) => {
@@ -73,27 +74,27 @@ export function CanvasSetup(data: Array<any>) {
     //     )
     // })
     // lines.pop()
-    const avgPoints = actualPoints.map((point, index, array) => {
-        const newArray = array.slice(index, index + 30)
-        return {
-            x: point.x,
-            y: newArray.reduce((acc, cur) => acc + cur.y, 0) / newArray.length
-        }
-    })
+    // const avgPoints = actualPoints.map((point, index, array) => {
+    //     const newArray = array.slice(index, index + 30)
+    //     return {
+    //         x: point.x,
+    //         y: newArray.reduce((acc, cur) => acc + cur.y, 0) / newArray.length
+    //     }
+    // })
 
-    const lines = avgPoints.map((point, index, array) => {
-        if (index == array.length - 1) return null;
-        return new BaseDrawable(
-            new LineState({
-                from: point,
-                to: array[index + 1],
-                color: new Color(255, 0, 0),
-                lineWidth: 0.5
-            }),
-            new LineRenderer()
-        )
-    })
-    lines.pop()
+    // const lines = avgPoints.map((point, index, array) => {
+    //     if (index == array.length - 1) return null;
+    //     return new BaseDrawable(
+    //         new LineState({
+    //             from: point,
+    //             to: array[index + 1],
+    //             color: new Color(255, 0, 0),
+    //             lineWidth: 0.5
+    //         }),
+    //         new LineRenderer()
+    //     )
+    // })
+    // lines.pop()
 
     const drawnObject = [
         new BaseDrawable(
@@ -114,8 +115,8 @@ export function CanvasSetup(data: Array<any>) {
         ),
         ...dates,
         ...amounts,
-        ...points,
-        ...lines
+        ...points
+        // ...lines
     ]
 
     return new Canvas(drawnObject, htmlCanvas, context);
@@ -159,6 +160,10 @@ function generatePoint(data: Point, width: number, height: number) {
                 y: height - transformRange(data.y, entryYInterval, exitYInterval)
             }
         }),
-        new CircleRenderer()
+        new CircleRenderer(),
+        [],
+        [
+            new AvoidMouse()
+        ]
     )
 }

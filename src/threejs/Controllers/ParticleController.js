@@ -13,11 +13,8 @@ export default class ParticleController extends AbstractController {
 
     onMount(object3d) {
         this.particleVelocities = object3d.geometry.vertices.map(vertex => {
-
-            const x = Math.random() > 0.5 ? Math.random() * 0.001 + 0.0005 : - (Math.random() * 0.001 + 0.0005);
-            const z = Math.random() > 0.5 ? Math.random() * 0.001 + 0.0005 : - (Math.random() * 0.001 + 0.0005);
             const y = - Math.random() * 0.001 - 0.002;
-            return new THREE.Vector3(x, y, z)
+            return new THREE.Vector3(0, y, 0)
         });
     }
 

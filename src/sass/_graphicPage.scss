@@ -90,13 +90,18 @@
             }
         }
 
-        .dot {
+        .leon {
+            margin-left: 1.25rem;
+        }
+
+        .rachel {
+            margin-right: 1.25rem;
+        }
+
+        .gobelins {
             display: inline-block;
-            background-color: white;
-            height: 0.2rem;
-            width: 0.2rem;
-            margin: 0 2.5rem;
-            border-radius: 100%;
+            width: 1rem;
+            margin: 0 1.25rem;
         }
     }
 }
